@@ -1,0 +1,49 @@
+﻿@{
+    List<Pokemon> pokemon = ((List<Pokemon>)Model);
+    
+}
+
+
+    <table class="table">
+
+        <thead>
+            <tr style="border-style:solid">
+                <th>Id</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th></th>
+                <th></th>
+                <th></th>
+
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+
+            @foreach (var item in pokemon)
+            {
+
+
+                <tr style="border-style:solid">
+                    <td>@item.idPokemon</td>
+                    <td></td>
+                    <td>@item.nombrePokemon</td>
+                    <td>@item.tipoPokemon</td>
+                    <td>
+                        <a href="/pokemon/edit?id=@item.idPokemon">Editar</a>
+                    </td>
+                    <td>
+                        <a href="/pokemon/delete?id=@item.idPokemon">Eliminar</a>
+                    </td>
+                    <td>
+                        <a href="/capturar?id=@item.idPokemon">Capturar</a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>

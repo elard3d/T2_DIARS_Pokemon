@@ -13,7 +13,7 @@ namespace T2_DIARS_Pokemon.Models.Maps
             builder.ToTable("Entrenador");
             builder.HasKey(o => o.idEntrenador);
 
-            builder.HasMany(o => o.entrenadorpokemons).WithOne(O => O.entrenador).HasForeignKey(o => o.idEntrenador);
+            builder.HasMany(o => o.entrenadorPokemones).WithOne(O => O.entrenador).HasForeignKey(o => o.idEntrenador);
 
         }
     }

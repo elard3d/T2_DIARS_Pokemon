@@ -1,0 +1,57 @@
+﻿@{
+    var pokemon = (Pokemon)ViewBag.Pokemon;
+}
+
+<h1>CREAR POKEMON </h1>
+
+<br />
+
+<div class="row">
+
+    <div class="col-16 offset-3">
+
+        <form action="/pokemon/edit" method="post">
+
+            <div class="form-group">
+
+                <input name="idPokemon" value="@pokemon.idPokemon" readonly />
+                <label> ID: </label>
+
+
+            </div>
+
+            <div class="form-group">
+                <label>Nombre: </label>
+                @Html.ValidationMessage("Name")
+                <input class="form-control" name="nombrePokemon" required="" value="@pokemon.nombrePokemon" />
+            </div>
+
+            <div class="form-group">
+
+                <label>Tipo: </label>
+                <select name="tipoPokemon" class="form-control">
+                    @foreach (var item in ViewBag.Types)
+                    {
+                        if (pokemon.tipoPokemon == item)
+                        {
+                            <option value="@item" selected> @item </option>
+                        }
+                        else
+                        {
+
+                            <option value="@item">@item </option>
+                        }
+                    }
+
+                </select>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+
+
+        </form>
+
+    </div>
+
+</div>

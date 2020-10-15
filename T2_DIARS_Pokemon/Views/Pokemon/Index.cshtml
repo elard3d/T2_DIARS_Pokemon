@@ -1,0 +1,61 @@
+﻿<h1>Lista de Pokemones</h1>
+
+<br />
+
+<a href="/pokemon/create"> Crear Pokemon </a>
+
+<br />
+<br />
+
+
+<div>
+    <form action="/pokemon/buscar" method="post" class="tm-search-form tm-section-pad-2">
+
+        BUSCAR <input name="nombre" type="text" class="form-control"  placeholder="Nombre Pokemon...">
+
+        <button type="submit" class="btn btn-primary tm-btn-search">Buscar </button>
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr style="border-style:solid">
+            <th>Id</th>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+
+        </tr>
+    </thead>
+
+    <tbody>
+
+
+        @foreach (var item in ViewBag.Pokemons)
+        {
+
+
+            <tr style="border-style:solid">
+                <td>@item.idPokemon</td>
+                <td></td>
+                <td>@item.nombrePokemon</td>
+                <td>@item.tipoPokemon</td>
+                <td>
+                    <a href="/pokemon/edit?id=@item.idPokemon">Editar</a>
+                </td>
+                <td>
+                    <a href="/pokemon/delete?id=@item.idPokemon">Eliminar</a>
+                </td>
+                <td>
+                    <a href="/capturar?id=@item.idPokemon">Capturar</a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+
+</table>

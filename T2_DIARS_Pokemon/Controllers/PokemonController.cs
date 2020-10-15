@@ -29,7 +29,7 @@ namespace T2_DIARS_Pokemon.Controllers
             _hostEnvironment = hostEnvironment;
 
         }
-
+        [Authorize]
         [HttpGet]
         public ViewResult Index()
         {

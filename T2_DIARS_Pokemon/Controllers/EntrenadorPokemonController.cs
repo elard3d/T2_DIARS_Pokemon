@@ -12,7 +12,7 @@ namespace T2_DIARS_Pokemon.Controllers
 {
     public class entrenadorPokemonController : Controller
     {
-        [Authorize]
+        
         public class EntrenadorPokemonController : Controller
         {
 

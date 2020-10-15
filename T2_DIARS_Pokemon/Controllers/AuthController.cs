@@ -17,10 +17,20 @@ namespace T2_DIARS_Pokemon.Controllers
 
 
         private PokemonContext context;
+        private readonly IConfiguration configuration;
 
-        public AuthController(PokemonContext _context) {
+        public AuthController(PokemonContext _context, IConfiguration _configuration) {
 
-            context = _context;
+             this.context = _context;
+             this.configuration= _configuration;
+
+        }
+
+
+        public string Index(string input) {
+
+            return CreateHash (input);
+
         }
 
 
@@ -35,7 +45,7 @@ namespace T2_DIARS_Pokemon.Controllers
         public IActionResult Login(string usuario, string pass) {
 
             var user = context.entrenadores
-                .Where(o => o.nombreUsuario == usuario && o.passUsuario== pass)
+                .Where(o => o.nombreUsuario == usuario && o.passUsuario == CreateHash(pass))
                 .FirstOrDefault();
 
             if(user != null)
@@ -69,6 +79,14 @@ namespace T2_DIARS_Pokemon.Controllers
 
         }
 
+        private string CreateHash(String input) {
 
+            var sha = SHA256.Create();
+            input = input + configuration.GetValue<string>("Token"); 
+            var hash = sha.ComputeHash(Encoding.Default.GetBytes(input));
+
+            return Convert.ToBase64String(hash);
+
+        }
     }
 }

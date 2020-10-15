@@ -10,6 +10,10 @@ namespace T2_DIARS_Pokemon.Models
     public class PokemonContext: DbContext
     {
 
+        public PokemonContext(DbContextOptions<PokemonContext> options) : base(options)
+        {
+
+        }
 
         public DbSet<Pokemon> pokemones { get; set; }
 
@@ -17,10 +21,7 @@ namespace T2_DIARS_Pokemon.Models
 
         public DbSet<EntrenadorPokemon> entrenadorPokemones { get; set; }
 
-        public PokemonContext(DbContextOptions<PokemonContext> options) : base(options)
-        {
-
-        }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

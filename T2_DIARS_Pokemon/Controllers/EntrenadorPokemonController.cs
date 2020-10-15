@@ -40,7 +40,7 @@ namespace T2_DIARS_Pokemon.Controllers
 
                 pokemonCapturado.fechaCaptura = DateTime.Now;
                 var claim = HttpContext.User.Claims.FirstOrDefault();
-                var user = conexion.entrenadores.Where(o => o.usuario == claim.Value).FirstOrDefault();
+                var user = conexion.entrenadores.Where(o => o.nombreUsuario== claim.Value).FirstOrDefault();
 
                 pokemonCapturado.idEntrenador = user.idEntrenador;
                 pokemonCapturado.idPokemon = idPokemon;

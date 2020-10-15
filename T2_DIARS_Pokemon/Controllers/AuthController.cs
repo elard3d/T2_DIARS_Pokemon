@@ -14,56 +14,60 @@ namespace T2_DIARS_Pokemon.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly PokemonContext _context;
-        private readonly IConfiguration configuration;
 
-        public AuthController(PokemonContext context, IConfiguration configuration)
-        {
-            _context = context;
-            this.configuration = configuration;
+
+        private PokemonContext context;
+
+        public AuthController(PokemonContext _context) {
+
+            context = _context;
         }
 
-               
+
         [HttpGet]
-        public IActionResult Login()
-        {
+
+        public IActionResult Login() {
+
             return View();
         }
+
         [HttpPost]
-        public IActionResult Login(string usuario, string password)
-        {
-            var user = _context.entrenadores.Where(o => o.usuario == usuario /*&& o.pass == CreateHash(password)*/)
+        public IActionResult Login(string usuario, string pass) {
+
+            var user = context.entrenadores
+                .Where(o => o.nombreUsuario == usuario && o.passUsuario== pass)
                 .FirstOrDefault();
-            if (user != null)
+
+            if(user != null)
             {
-                var claims = new List<Claim>
-                {
+
+                    var claims = new List<Claim> {
                     new Claim(ClaimTypes.Name, usuario)
                 };
 
-                var claimsIdentity = new ClaimsIdentity(claims, "Login");
-                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-                HttpContext.SignInAsync(claimsPrincipal);
+                    var clainmsIdentity = new ClaimsIdentity(claims, "Login");
+                    var clainmsPrincipal = new ClaimsPrincipal(clainmsIdentity);
 
-                return RedirectToAction("Index", "Home");
+                    HttpContext.SignInAsync(clainmsPrincipal);
+
+                    return RedirectToAction("Index", "Home");
+               
             }
-            ModelState.AddModelError("Login", "Usuario o contraseña incorrectos.");
+
+            ModelState.AddModelError("Login", "Usuario o contraseña incorrecto");
             return View();
+
         }
+
         [HttpGet]
-        
-        private string CreateHash(string input)
-        {
-            var sha = SHA256.Create();
-            input += configuration.GetValue<string>("Prueba");
-            var hash = sha.ComputeHash(Encoding.Default.GetBytes(input));
 
-            return Convert.ToBase64String(hash);
+        public IActionResult Logout() {
+
+            HttpContext.SignOutAsync();
+            return RedirectToAction("Login");
+
         }
-        
-
-
 
 
     }

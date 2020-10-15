@@ -36,6 +36,14 @@ namespace T2_DIARS_Pokemon
                 .AddCookie(options => {
                     options.LoginPath = "/Auth/Login";
                 });
+
+            services.AddSession(options => {
+
+                options.IdleTimeout = TimeSpan.FromMinutes(120);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +64,9 @@ namespace T2_DIARS_Pokemon
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {

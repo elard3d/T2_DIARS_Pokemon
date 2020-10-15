@@ -11,12 +11,12 @@ namespace T2_DIARS_Pokemon.Models
 
         public int idEntrenador { get; set; }
 
-        [Required(ErrorMessage = "El campo correo es requerido.")]
-        public string usuario { get; set; }
+        //[Required(ErrorMessage = "El campo correo es requerido.")]
+        public string nombreUsuario { get; set; }
 
-        [Required(ErrorMessage = "El campo contraseña como mínimo debe contener al menos 6 caracteres.")]
-        [MinLength(6)]
-        public string pass { get; set; }
+        //[Required(ErrorMessage = "El campo contraseña como mínimo debe contener al menos 6 caracteres.")]
+        //[MinLength(6)]
+        public string passUsuario { get; set; }
 
         public List<EntrenadorPokemon> entrenadorPokemones { get; set; }
 

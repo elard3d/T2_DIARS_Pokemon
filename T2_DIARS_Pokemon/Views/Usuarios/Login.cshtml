@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<form action="/auth/login" method="post" class="form-register">
+
+    <span>@Html.ValidationMessage("Login")</span>
+
+    <input class="controls" type="text" name="usuario" placeholder="Usuario" />
+    <br />
+    <input class="controls" type="password" name="pass" placeholder="Contraseña" />
+    <br />
+    <button class="botons" type="submit">Aceptar</button>
+</form>
+

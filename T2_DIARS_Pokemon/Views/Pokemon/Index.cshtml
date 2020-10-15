@@ -8,14 +8,16 @@
 <br />
 
 
-<div>
-    <form action="/pokemon/buscar" method="post" class="tm-search-form tm-section-pad-2">
 
-        BUSCAR <input name="nombre" type="text" class="form-control"  placeholder="Nombre Pokemon...">
+<form action="/pokemon/buscar" method="post" class="tm-search-form tm-section-pad-2">
 
-        <button type="submit" class="btn btn-primary tm-btn-search">Buscar </button>
-    </form>
-</div>
+    BUSCAR <input name="nombre" type="text" class="form-control" placeholder="Nombre Pokemon...">
+
+    <button type="submit" class="btn btn-primary tm-btn-search">Buscar </button>
+</form>
+
+<br />
+<br />
 
 <table class="table">
     <thead>
@@ -41,7 +43,7 @@
 
             <tr style="border-style:solid">
                 <td>@item.idPokemon</td>
-                <td></td>
+                <td><img src="@item.imagenPokemon" width="100" /></td>
                 <td>@item.nombrePokemon</td>
                 <td>@item.tipoPokemon</td>
                 <td>

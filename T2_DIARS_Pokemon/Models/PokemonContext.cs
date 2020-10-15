@@ -13,7 +13,7 @@ namespace T2_DIARS_Pokemon.Models
 
         public DbSet<Pokemon> pokemones { get; set; }
 
-        public DbSet<Entrenador> entrenadores { get; set; }
+        public virtual DbSet<Entrenador> entrenadores { get; set; }
 
         public DbSet<EntrenadorPokemon> entrenadorPokemones { get; set; }
 

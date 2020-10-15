@@ -12,7 +12,6 @@ namespace T2_DIARS_Pokemon.Controllers
     public class HomeController : Controller
     {
 
-        private readonly PokemonContext _context;
 
         private readonly ILogger<HomeController> _logger;
 

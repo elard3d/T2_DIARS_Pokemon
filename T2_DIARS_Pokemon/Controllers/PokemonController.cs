@@ -1,21 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using T2_DIARS_Pokemon.Models;
+
+
 
 namespace T2_DIARS_Pokemon.Controllers
 {
+
+    
+
     public class PokemonController : Controller
     {
 
         private PokemonContext _context;
+        public IHostingEnvironment _hostEnvironment;
 
-        public PokemonController(PokemonContext context )
+        public PokemonController(PokemonContext context,  IHostingEnvironment hostEnvironment)
         {
 
-            this._context = context;
+            _context = context;
+            _hostEnvironment = hostEnvironment;
 
         }
 
@@ -36,14 +47,25 @@ namespace T2_DIARS_Pokemon.Controllers
 
 
         [HttpPost]
-        public ActionResult Create(Pokemon pokemon)//POST
+
+        public ActionResult Create(Pokemon pokemon, IFormFile imagenPokemon)//POST
         {
-            //if (account.Name == null || account.Name == "") 
-
-            //    ModelState.AddModelError("Name", "El campo Nombre es obligatorio");
-
+           
             if (ModelState.IsValid)
             {
+
+                if (imagenPokemon != null && imagenPokemon.Length > 0) {
+
+                    var basePath = _hostEnvironment.ContentRootPath + @"\wwwroot";
+                    var ruta = @"\img\" + imagenPokemon.FileName;
+                     
+                    using (var stream = new FileStream(basePath + ruta, FileMode.Create)) 
+                    {
+                        imagenPokemon.CopyTo(stream);
+                        pokemon.imagenPokemon = ruta;
+                    }
+
+                }
 
                 _context.pokemones.Add(pokemon);
                 _context.SaveChanges();
@@ -58,6 +80,7 @@ namespace T2_DIARS_Pokemon.Controllers
 
 
         [HttpGet]
+
         public ActionResult Edit(int id)
         {
 
@@ -69,6 +92,7 @@ namespace T2_DIARS_Pokemon.Controllers
         }
 
         [HttpPost]
+
         public ActionResult Edit(Pokemon pokemon)
         {
 
@@ -79,6 +103,7 @@ namespace T2_DIARS_Pokemon.Controllers
         }
 
         [HttpGet]
+
         public ActionResult Delete(int id)
         {
 

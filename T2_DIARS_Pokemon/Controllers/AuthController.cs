@@ -32,7 +32,7 @@ namespace T2_DIARS_Pokemon.Controllers
         [HttpPost]
         public IActionResult Login(string usuario, string password)
         {
-            var user = _context.entrenadores.Where(o => o.usuario == usuario && o.pass == CreateHash(password))
+            var user = _context.entrenadores.Where(o => o.usuario == usuario /*&& o.pass == CreateHash(password)*/)
                 .FirstOrDefault();
             if (user != null)
             {
@@ -56,7 +56,7 @@ namespace T2_DIARS_Pokemon.Controllers
         private string CreateHash(string input)
         {
             var sha = SHA256.Create();
-            input += configuration.GetValue<string>("Token");
+            input += configuration.GetValue<string>("Prueba");
             var hash = sha.ComputeHash(Encoding.Default.GetBytes(input));
 
             return Convert.ToBase64String(hash);

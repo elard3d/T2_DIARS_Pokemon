@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Entrenado Pokemon</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>fecha</th>
+            <th>Imagen</th>
+            <th>Liberar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pokemonCapturado in Model)
+        {
+            <tr>
+                <td>@pokemonCapturado.idEntrenadorPokemon</td>
+                <td>@pokemonCapturado.pokemon.nombrePokemon</td>
+                <td>@pokemonCapturado.pokemon.tipoPokemon</td>
+                <td>@pokemonCapturado.fechaCaptura.ToString("dd/mm/yyyy")</td>
+              
+                <td>
+                    <a href="/EntrenadorPokemon/Delete?id=@pokemonCapturado.idEntrenadorPokemon">Liberar</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

@@ -26,6 +26,15 @@ namespace T2_DIARS_Pokemon.Controllers
 
         }
 
+        public string LoggedUser() {
+
+            var claims = HttpContext.User.Claims.FirstOrDefault();
+            var user = context.entrenadores.Where(o => o.nombreUsuario == claims.Value).FirstOrDefault();
+
+            return "el usuario logueado es " + user.idEntrenador;
+        
+        }
+
 
         public string Index(string input) {
 
